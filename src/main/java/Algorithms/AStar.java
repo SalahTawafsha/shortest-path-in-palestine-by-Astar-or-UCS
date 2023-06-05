@@ -16,7 +16,7 @@ public class AStar implements ShortestPath {
         Set<Node> closedList = new HashSet<>();                 // to store what we visit
 
         queue.add(new Node(new City(start), 0.0));
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) {          // O(b^d)
             Node curr = queue.remove();
 
             if (closedList.contains(curr))

@@ -20,7 +20,7 @@ public class BFS implements ShortestPath {
 
         queue.add(new Node(new City(start), 0.0));
 
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) {          // O(V+E)
             Node curr = queue.remove();
 
             closedList.add(curr);
