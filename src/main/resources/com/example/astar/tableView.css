@@ -3,46 +3,54 @@
 .table-view {
     -fx-background-color: transparent;
 }
+
 /* to remove header of scroll bar  */
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
+
 /* to change the corner to transparent */
 .table-view .corner {
     -fx-background-color: transparent;
 }
+
 /* to change color of the top header*/
-.table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom, #d8d9e0, #f6f6f6);
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #d8d9e0, gray);
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;
 }
+
 /* to change the column header to transparent */
 .table-view .column-header {
     -fx-background-color: transparent;
 }
+
 /* to change the corner of table to transparent */
-.table-view .table-cell{
+.table-view .table-cell {
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
-    -fx-font-size: 11.0px;
+    -fx-font-size: 11px;
 }
+
 /* to change color of odd row */
-.table-row-cell:odd{
+.table-row-cell:odd {
     -fx-background-color: #f6f6f6;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
+
 /* to change color of even row */
-.table-row-cell:even{
-    -fx-background-color:  #d8d9e0;
+.table-row-cell:even {
+    -fx-background-color: #d8d9e0;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
+
 /* to change color of selected row */
-.table-row-cell:hover{
-    -fx-background-color: #d8d9e0;
+.table-row-cell:hover {
+    -fx-background-color: rgba(161, 161, 161, 0.56);
     -fx-text-background-color: #CE2029;
 }
 
@@ -55,6 +63,7 @@
 .table-view .virtual-flow .scroll-bar:horizontal .track-background {
     -fx-background-color: transparent;
 }
+
 /*
  * to remove button of scroll bar
 */
@@ -63,10 +72,83 @@
     -fx-opacity: 0;
     -fx-padding: 2;
 }
-.table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color:  linear-gradient(to bottom, #d8d9e0, #f6f6f6);
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom, #d8d9e0, gray);
 }
 
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color:  linear-gradient(to right, #d8d9e0, #f6f6f6);
+    -fx-background-color: linear-gradient(to right, #d8d9e0, #f6f6f6);
+}
+
+.combo-box, .button {
+    -fx-background-color: linear-gradient(to bottom, #d8d9e0, lightgray);
+    -fx-border-radius: 50;
+    -fx-border-color: gray;
+}
+
+.combo-box .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view .list-cell:even {
+    -fx-background-color: #d8d9e0;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 3;
+}
+
+.combo-box-popup .list-view .list-cell:odd {
+    -fx-background-color: #f6f6f6;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 3;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgba(161, 161, 161, 0.56);
+    -fx-text-background-color: #CE2029;
+}
+
+
+.scroll-bar:vertical *.increment-arrow,
+.scroll-bar:vertical *.decrement-arrow {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, #d8d9e0, gray);
+}
+
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-background-image: null;
+    -fx-padding: 3px;
+}
+
+.radio-button .radio:selected {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+
+.radio-button -radio:armed {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+
+.radio-button -radio:determinate {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+
+.radio-button -radio:indeterminate {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+
+.radio-button {
+    -fx-font-weight: bold;
 }

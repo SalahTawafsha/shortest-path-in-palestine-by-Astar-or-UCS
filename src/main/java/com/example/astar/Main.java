@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// just run FXMLLoader.load() to load the fxml file
 package com.example.astar;
 
 import javafx.application.Application;

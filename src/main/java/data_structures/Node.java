@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// store City that edge go to it, f, g and parent that for find path
 package data_structures;
 
 import records.City;
@@ -6,22 +8,21 @@ import java.util.Objects;
 
 public final class Node implements Comparable<Node> {
     private final City city;
-    private Double f;
-    private Double g;
-    private Double h;
-    private Node parent;
+    private final Double f;
+    private final Double g;
+    private final Node parent;
 
     public Node(City city, Double cost) {
         this.city = city;
         this.f = cost;
         this.g = cost;
+        this.parent = null;
     }
 
-    public Node(City city, Double f, Double g, Double h, Node parent) {
+    public Node(City city, Double f, Double g, Node parent) {
         this.city = city;
         this.f = f;
         this.g = g;
-        this.h = h;
         this.parent = parent;
     }
 
@@ -44,22 +45,6 @@ public final class Node implements Comparable<Node> {
         return g;
     }
 
-    public void setG(Double g) {
-        this.g = g;
-    }
-
-    public Double getH() {
-        return h;
-    }
-
-    public void setH(Double h) {
-        this.h = h;
-    }
-
-    public void setF(Double f) {
-        this.f = f;
-    }
-
     public City getCity() {
         return city;
     }
@@ -73,8 +58,7 @@ public final class Node implements Comparable<Node> {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Node) obj;
-        return Objects.equals(this.city, that.city) &&
-                Objects.equals(this.f, that.f);
+        return Objects.equals(this.city, that.city);
     }
 
     @Override
@@ -82,7 +66,4 @@ public final class Node implements Comparable<Node> {
         return Objects.hash(city, f);
     }
 
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
 }

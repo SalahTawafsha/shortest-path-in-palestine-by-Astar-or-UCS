@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// record to store name of city as object of city
 package records;
 
 public record City(String name) {

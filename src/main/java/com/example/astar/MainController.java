@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// Controller class for the main window
 package com.example.astar;
 
 import Algorithms.AStar;
@@ -54,42 +56,36 @@ public class MainController implements Initializable {
     @FXML
     void find() {
         if (sourceBox.getValue() != null && destinationBox.getValue() != null)
-            if (heuristic.getHeuristic(sourceBox.getValue(), destinationBox.getValue()) != 0) {
-                findShortestPath();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Distance is Zero!");
-                alert.setContentText("Nice try, you can't go to the same city!");
-                alert.show();
-            }
+            findShortestPath();
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fill all inputs!");
+            alert.setTitle("Please fill all inputs!");
             alert.setContentText("You must select Source and Destination!");
             alert.show();
         }
     }
 
     private void findShortestPath() {
-        ShortestPath shortestPath;
-        if (aStar.isSelected())
+        ShortestPath shortestPath;      // interface to just define the method shortestPath and not the implementation
+        if (aStar.isSelected())         // select implementation Class
             shortestPath = new AStar();
         else
             shortestPath = new BFS();
-        long currTime = System.currentTimeMillis();
-        Node n = shortestPath.shortestPath(sourceBox.getValue(), destinationBox.getValue());
-        time.setText("Time taken: " + (System.currentTimeMillis() - currTime) + "ms");
-        ArrayList<TableNode> tableNodes = new ArrayList<>();
-        if (n != null) {
-            tableNodes.add(new TableNode("Total", "", n.getG()));
-            Node curr = n;
-            for (; curr.getParent() != null; curr = curr.getParent())
-                tableNodes.add(0, new TableNode(curr.getParent().getCity().name(), curr.getCity().name(), curr.getG() - curr.getParent().getG()));
 
+        long currTime = System.currentTimeMillis();     // to calculate the time taken to find the shortest path
+        Node n = shortestPath.shortestPath(sourceBox.getValue(), destinationBox.getValue());
+        time.setText("Time taken: " + (System.currentTimeMillis() - currTime) + "ms");   // set the time taken to the label
+
+        ArrayList<TableNode> tableNodes = new ArrayList<>();    // to display the path in the table
+        if (n != null) {
+            tableNodes.add(new TableNode("Total", "", n.getG())); // store total distance
+            Node curr = n;
+            for (; curr.getParent() != null; curr = curr.getParent())   // add each node with its parent and cost
+                tableNodes.add(new TableNode(curr.getParent().getCity().name(), curr.getCity().name(), curr.getG() - curr.getParent().getG()));
         } else
             tableNodes.add(new TableNode("No path found", "", Double.MAX_VALUE));
 
-//        System.out.println(tableNodes);
+        Collections.reverse(tableNodes);
         tableView.setItems(FXCollections.observableArrayList(tableNodes));
     }
 
@@ -108,9 +104,10 @@ public class MainController implements Initializable {
         sourceBox.setItems(cities);
         destinationBox.setItems(cities);
 
-        sourceCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getSource()));
-        destinationCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDestination()));
-        costCol.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().getCost()).asObject());
+        sourceCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().source()));
+        destinationCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().destination()));
+        costCol.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().cost()).asObject());
+        tableView.setSelectionModel(null);
 
         readCities();
 

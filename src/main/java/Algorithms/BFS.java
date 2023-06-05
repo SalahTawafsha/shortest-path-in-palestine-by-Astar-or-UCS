@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// BFS Algorithm implementation
 package Algorithms;
 
 import com.example.astar.MainController;
@@ -29,7 +31,7 @@ public class BFS implements ShortestPath {
             for (Node node : adj) {
 
                 if (!closedList.contains(node)) {
-                    Node n = new Node(node.getCity(), node.getG() + curr.getG(), node.getG() + curr.getG(), node.getG() + curr.getG(), curr);
+                    Node n = new Node(node.getCity(), node.getG() + curr.getG(), node.getG() + curr.getG(), curr);
                     queue.add(n);
                     closedList.add(node);
                 }

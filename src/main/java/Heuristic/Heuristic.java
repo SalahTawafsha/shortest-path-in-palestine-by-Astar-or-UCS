@@ -1,3 +1,5 @@
+// Author: Salah Tawafsha
+// this class reads Heuristic and have method to get heuristic from city to destination
 package Heuristic;
 
 import javafx.collections.FXCollections;
