@@ -103,6 +103,11 @@
     -fx-padding: 3;
 }
 
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: rgba(161, 161, 161, 0.23);
+    -fx-text-background-color: #CE2029;
+}
+
 .combo-box-popup .list-view .list-cell:hover {
     -fx-background-color: rgba(161, 161, 161, 0.56);
     -fx-text-background-color: #CE2029;

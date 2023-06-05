@@ -29,9 +29,9 @@ public class AStar implements ShortestPath {
             LinkedList<Node> adj = graph.get(curr.getCity());
             for (Node node : adj) {
 
-                if (closedList.contains(node)) {
+                if (closedList.contains(node))
                     continue;
-                }
+
 
                 double gScore = node.getG() + curr.getG();
                 double heuristicScore = MainController.getHeuristic().getHeuristic(node.getCity().name(), target);
