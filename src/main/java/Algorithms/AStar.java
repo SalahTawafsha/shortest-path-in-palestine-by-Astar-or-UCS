@@ -15,7 +15,7 @@ public class AStar implements ShortestPath {
         PriorityQueue<Node> queue = new PriorityQueue<>();      // priority queue to delete min with O(log n)
         Set<Node> closedList = new HashSet<>();                 // to store what we visit
 
-        queue.add(new Node(new City(start), 0.0));
+        queue.add(new Node(get(start), 0.0));
         while (!queue.isEmpty()) {          // O(b^d)
             Node curr = queue.remove();
 
@@ -44,5 +44,16 @@ public class AStar implements ShortestPath {
 
         }
         return null;
+    }
+
+    private City get(String cityName) {
+        Set<City> cities = graph.keySet();
+
+        for (City one : cities) {
+            if (one.name().equals(cityName)) {
+                return one;
+            }
+        }
+        return new City(cityName, 0, 0);
     }
 }

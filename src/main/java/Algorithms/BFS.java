@@ -9,6 +9,7 @@ import records.City;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 public class BFS implements ShortestPath {
     private final HashMap<City, LinkedList<Node>> graph = MainController.getGraph();
@@ -18,7 +19,7 @@ public class BFS implements ShortestPath {
         PriorityQueue<Node> queue = new PriorityQueue<>();
         LinkedList<Node> closedList = new LinkedList<>();
 
-        queue.add(new Node(new City(start), 0.0));
+        queue.add(new Node(get(start), 0.0));
 
         while (!queue.isEmpty()) {          // O(V+E)
             Node curr = queue.remove();
@@ -39,6 +40,17 @@ public class BFS implements ShortestPath {
 
         }
         return null;
+    }
+
+    private City get(String cityName) {
+        Set<City> cities = graph.keySet();
+
+        for (City one : cities) {
+            if (one.name().equals(cityName)) {
+                return one;
+            }
+        }
+        return new City(cityName, 0, 0);
     }
 
 }
