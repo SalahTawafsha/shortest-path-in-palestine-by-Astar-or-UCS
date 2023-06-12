@@ -7,11 +7,11 @@ import Algorithms.BFS;
 import Algorithms.ShortestPath;
 import Heuristic.Heuristic;
 import data_structures.Node;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -25,8 +25,6 @@ import java.util.*;
 
 public class MainController implements Initializable {
 
-    private static final double PIC_WIDTH = 372;
-    private static final double PIC_HEIGHT = 639;
     @FXML
     private TextArea path;
     @FXML
@@ -47,11 +45,12 @@ public class MainController implements Initializable {
     private Label time;
     @FXML
     private TextField distance;
-
-    private final static Heuristic heuristic = new Heuristic();
-    private final static HashMap<City, LinkedList<Node>> graph = new HashMap<>();
     @FXML
     private Pane pane;
+
+    private final static HashMap<City, LinkedList<Node>> graph = new HashMap<>();
+    private static final double PIC_WIDTH = 372;
+    private static final double PIC_HEIGHT = 639;
 
 
     @FXML
@@ -81,17 +80,17 @@ public class MainController implements Initializable {
         lines.getChildren().clear();
 
         if (n != null) {
-
-            Node curr = n;
             distance.setText(String.valueOf(n.getG()));
+
             StringBuilder path = new StringBuilder(n.getCity().name());
-            for (; curr.getParent() != null; curr = curr.getParent()) {  // add each node with its parent and cost
+
+            for (Node curr = n; curr.getParent() != null; curr = curr.getParent()) {  // add each node with its parent and cost
                 Line l = new Line(getX(curr.getCity().longitude()), getY(curr.getCity().latitude()),
                         getX(curr.getParent().getCity().longitude()), getY(curr.getParent().getCity().latitude()));
                 l.setStrokeWidth(2);
 
                 lines.getChildren().add(l);
-                path.insert(0, curr.getParent().getCity().name() + "\n|\n");
+                path.insert(0, curr.getParent().getCity().name() + "\n⬇\n");
 
             }
             this.path.setText(path.toString());
@@ -124,18 +123,13 @@ public class MainController implements Initializable {
         };
     }
 
-
-    public static Heuristic getHeuristic() {
-        return heuristic;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup toggleGroup = new ToggleGroup();
         bfs.setToggleGroup(toggleGroup);
         aStar.setToggleGroup(toggleGroup);
 
-        ObservableList<String> cities = heuristic.getCities();
+        ObservableList<String> cities = Heuristic.getInstance().getCities();
         sourceBox.setItems(cities);
         destinationBox.setItems(cities);
 
@@ -143,40 +137,46 @@ public class MainController implements Initializable {
 
         readRoads();
 
+        drawCities();
+
+    }
+
+    private void drawCities() {
         for (City one : graph.keySet()) {
             Button b = new Button(one.name());
             b.setStyle("-fx-font-size: 5; -fx-max-height: 10;-fx-max-width: 10");
-            double y = getY(one.latitude());
-            double x = getX(one.longitude());
-            b.setLayoutY(y);
-            b.setLayoutX(x);
-            b.hoverProperty().addListener(e -> {
-                if (b.isHover()) {
-                    Label l = new Label(b.getText());
-                    l.setLayoutY(b.getLayoutY() - 10);
-                    l.setLayoutX(b.getLayoutX());
-                    l.setPadding(new Insets(2.5));
-                    l.setStyle(
-                            "-fx-background-color: linear-gradient(to bottom, #d8d9e0, lightgray); " +
-                                    "-fx-border-radius: 50;fx-border-color: gray;-fx-background-radius: 20;");
-
-
-                    l.hoverProperty().addListener(e1 -> {
-                        if (!l.isHover())
-                            pane.getChildren().remove(l);
-                    });
-
-                    l.setOnMouseClicked(select(l));
-
-                    pane.getChildren().add(l);
-
-                }
-            });
+            b.setLayoutY(getY(one.latitude()));
+            b.setLayoutX(getX(one.longitude()));
+            b.hoverProperty().addListener(showLabel(b));
 
             b.setOnMouseClicked(select(b));
 
             pane.getChildren().add(b);
         }
+    }
+
+    private ChangeListener<? super Boolean> showLabel(Button b) {
+        return (ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (b.isHover()) {
+                Label l = new Label(b.getText());
+                l.setLayoutY(b.getLayoutY());
+                l.setLayoutX(b.getLayoutX());
+                l.setStyle(
+                        "-fx-background-color: linear-gradient(to bottom, #d8d9e0, lightgray); " +
+                                "-fx-border-radius: 50;fx-border-color: gray;-fx-background-radius: 20;-fx-padding: 2.5");
+
+
+                l.hoverProperty().addListener(e1 -> {
+                    if (!l.isHover())
+                        pane.getChildren().remove(l);
+                });
+
+                l.setOnMouseClicked(select(l));
+
+                pane.getChildren().add(l);
+
+            }
+        };
     }
 
     private void readRoads() {

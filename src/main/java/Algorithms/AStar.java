@@ -2,6 +2,7 @@
 // A* Algorithm implementation
 package Algorithms;
 
+import Heuristic.Heuristic;
 import com.example.astar.MainController;
 import data_structures.Node;
 import records.City;
@@ -34,7 +35,7 @@ public class AStar implements ShortestPath {
 
 
                 double gScore = node.getG() + curr.getG();
-                double heuristicScore = MainController.getHeuristic().getHeuristic(node.getCity().name(), target);
+                double heuristicScore = Heuristic.getInstance().getHeuristic(node.getCity().name(), target);
 
                 if (!queue.contains(node) || gScore + heuristicScore < node.getF()) {
                     Node n = new Node(node.getCity(), gScore + heuristicScore, gScore, curr);

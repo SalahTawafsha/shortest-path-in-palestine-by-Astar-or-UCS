@@ -13,8 +13,9 @@ import java.util.Scanner;
 
 public class Heuristic {
     private final ArrayList<AirDistance> airDistances = new ArrayList<>();
+    private static Heuristic heuristic;
 
-    public Heuristic() {
+    private Heuristic() {
         try {
             Scanner scan = new Scanner(new File("air distance.csv"));
             while (scan.hasNextLine()) {
@@ -26,6 +27,13 @@ public class Heuristic {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't find the file of Air Distance.");
         }
+    }
+
+    // get instance of heuristic
+    public static Heuristic getInstance() {
+        if (heuristic == null)
+            heuristic = new Heuristic();
+        return heuristic;
     }
 
     public double getHeuristic(String sourceName, String destinationName) {
