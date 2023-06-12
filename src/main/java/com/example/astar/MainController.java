@@ -7,9 +7,6 @@ import Algorithms.BFS;
 import Algorithms.ShortestPath;
 import Heuristic.Heuristic;
 import data_structures.Node;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,18 +17,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import records.City;
-import records.TableNode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.security.cert.PolicyNode;
 import java.util.*;
 
 public class MainController implements Initializable {
 
     private static final double PIC_WIDTH = 372;
     private static final double PIC_HEIGHT = 639;
+    @FXML
+    private TextArea path;
     @FXML
     private Pane lines;
     @FXML
@@ -48,6 +45,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Label time;
+    @FXML
+    private TextField distance;
 
     private final static Heuristic heuristic = new Heuristic();
     private final static HashMap<City, LinkedList<Node>> graph = new HashMap<>();
@@ -82,17 +81,20 @@ public class MainController implements Initializable {
         lines.getChildren().clear();
 
         if (n != null) {
-//            tableNodes.add(new TableNode("Total", "", n.getG())); // store total distance
 
             Node curr = n;
+            distance.setText(String.valueOf(n.getG()));
+            StringBuilder path = new StringBuilder(n.getCity().name());
             for (; curr.getParent() != null; curr = curr.getParent()) {  // add each node with its parent and cost
                 Line l = new Line(getX(curr.getCity().longitude()), getY(curr.getCity().latitude()),
                         getX(curr.getParent().getCity().longitude()), getY(curr.getParent().getCity().latitude()));
                 l.setStrokeWidth(2);
 
                 lines.getChildren().add(l);
-//                tableNodes.add(new TableNode(curr.getParent().getCity().name(), curr.getCity().name(), curr.getG() - curr.getParent().getG()));
+                path.insert(0, curr.getParent().getCity().name() + "\n|\n");
+
             }
+            this.path.setText(path.toString());
         } else
             time.setText("No path found");
 
@@ -155,8 +157,8 @@ public class MainController implements Initializable {
                     l.setLayoutX(b.getLayoutX());
                     l.setPadding(new Insets(2.5));
                     l.setStyle(
-                            "-fx-background-color: pink;-fx-background-radius: 40;-fx-border-color: black;\n" +
-                                    "-fx-border-radius: 40; -fx-alignment: center;-fx-font-size: 12;");
+                            "-fx-background-color: linear-gradient(to bottom, #d8d9e0, lightgray); " +
+                                    "-fx-border-radius: 50;fx-border-color: gray;-fx-background-radius: 20;");
 
 
                     l.hoverProperty().addListener(e1 -> {
@@ -174,7 +176,6 @@ public class MainController implements Initializable {
             b.setOnMouseClicked(select(b));
 
             pane.getChildren().add(b);
-//            items.add(one.getName());
         }
     }
 
@@ -222,5 +223,14 @@ public class MainController implements Initializable {
 
     public static HashMap<City, LinkedList<Node>> getGraph() {
         return graph;
+    }
+
+    public void clear() {
+        lines.getChildren().clear();
+        sourceBox.setValue(null);
+        destinationBox.setValue(null);
+        path.setText("");
+        distance.setText("");
+        time.setText("");
     }
 }

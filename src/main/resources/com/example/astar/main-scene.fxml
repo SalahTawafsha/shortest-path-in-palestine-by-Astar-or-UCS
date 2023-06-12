@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,74 +17,97 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" prefHeight="800.0" prefWidth="1500.0" spacing="20.0" style="-fx-background-color: skyblue;" stylesheets="@tableView.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.astar.MainController">
-   <BorderPane prefHeight="800.0" prefWidth="373.0">
-      <bottom>
-           <Label fx:id="time" alignment="CENTER" prefHeight="18.0" prefWidth="463.0" text="time in ms: 50" BorderPane.alignment="CENTER" />
-      </bottom>
-      <center>
-         <Pane fx:id="pane" prefHeight="695.0" prefWidth="374.0" BorderPane.alignment="CENTER">
-            <children>
-               <ImageView fitHeight="639.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@map.jpg" />
-                  </image>
-               </ImageView>
-               <Pane fx:id="lines" layoutY="-2.0" prefHeight="639.0" prefWidth="371.0" />
-            </children>
-            <BorderPane.margin>
-               <Insets top="100.0" />
-            </BorderPane.margin>
-         </Pane>
-      </center>
-   </BorderPane>
+<HBox alignment="CENTER" prefHeight="800.0" prefWidth="1500.0" spacing="20.0" style="-fx-background-color: skyblue;"
+      stylesheets="@tableView.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.astar.MainController">
+    <BorderPane prefHeight="800.0" prefWidth="373.0">
+        <bottom>
+            <Label fx:id="time" alignment="CENTER" prefHeight="18.0" prefWidth="463.0" text="time in ms: 50"
+                   BorderPane.alignment="CENTER"/>
+        </bottom>
+        <center>
+            <Pane fx:id="pane" prefHeight="695.0" prefWidth="374.0" BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets top="100.0"/>
+                </BorderPane.margin>
+                <ImageView fitHeight="639.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@map.jpg"/>
+                </ImageView>
+                <Pane fx:id="lines" layoutY="-2.0" prefHeight="639.0" prefWidth="371.0"/>
+            </Pane>
+        </center>
+    </BorderPane>
     <VBox alignment="CENTER" layoutX="128.0" layoutY="83.0" prefHeight="324.0" prefWidth="318.0">
         <GridPane alignment="CENTER" prefHeight="315.0" prefWidth="318.0">
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <ComboBox fx:id="sourceBox" prefWidth="150.0" style="-fx-background-radius: 50;" GridPane.columnIndex="1">
                 <GridPane.margin>
-                    <Insets left="20.0" />
+                    <Insets left="20.0"/>
                 </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="destinationBox" onAction="#find" prefWidth="150.0" style="-fx-background-radius: 50;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ComboBox fx:id="destinationBox" onAction="#find" prefWidth="150.0" style="-fx-background-radius: 50;"
+                      GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <GridPane.margin>
-                    <Insets left="20.0" />
+                    <Insets left="20.0"/>
                 </GridPane.margin>
             </ComboBox>
             <Label text="Source:">
                 <GridPane.margin>
-                    <Insets right="20.0" />
+                    <Insets right="20.0"/>
                 </GridPane.margin>
             </Label>
             <Label text="Destination:" GridPane.rowIndex="1">
                 <GridPane.margin>
-                    <Insets right="20.0" />
+                    <Insets right="20.0"/>
                 </GridPane.margin>
             </Label>
-         <Label layoutX="86.0" layoutY="89.0" text="Path:" GridPane.rowIndex="2">
-            <GridPane.margin>
-               <Insets right="20.0" />
-            </GridPane.margin>
-         </Label>
-         <TextArea fx:id="path" prefHeight="78.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label layoutX="86.0" layoutY="89.0" text="Path:" GridPane.rowIndex="3">
+                <GridPane.margin>
+                    <Insets right="20.0"/>
+                </GridPane.margin>
+            </Label>
+            <TextArea fx:id="path" prefHeight="78.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <GridPane.margin>
+                    <Insets left="20.0"/>
+                </GridPane.margin>
+            </TextArea>
+            <Label text="Distance:" GridPane.rowIndex="2">
+                <GridPane.margin>
+                    <Insets right="20.0"/>
+                </GridPane.margin>
+            </Label>
+            <TextField fx:id="distance" alignment="CENTER" prefHeight="27.0" prefWidth="133.0" GridPane.columnIndex="1"
+                       GridPane.rowIndex="2">
+                <GridPane.margin>
+                    <Insets left="20.0"/>
+                </GridPane.margin>
+            </TextField>
         </GridPane>
         <HBox alignment="CENTER" prefHeight="67.0" prefWidth="279.0" spacing="20.0">
             <RadioButton fx:id="aStar" mnemonicParsing="false" selected="true" text="A*">
                 <opaqueInsets>
-                    <Insets />
+                    <Insets/>
                 </opaqueInsets>
             </RadioButton>
-            <RadioButton fx:id="bfs" mnemonicParsing="false" text="BFS" />
+            <RadioButton fx:id="bfs" mnemonicParsing="false" text="BFS"/>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#find" prefHeight="47.0" prefWidth="104.0" style="-fx-background-radius: 50;" text="Find" />
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#find" prefHeight="47.0" prefWidth="104.0"
+                        style="-fx-background-radius: 50;" text="Find"/>
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clear" prefHeight="47.0"
+                        prefWidth="104.0" style="-fx-background-radius: 50;" text="Clear"/>
+            </children>
+        </HBox>
     </VBox>
 
 </HBox>
