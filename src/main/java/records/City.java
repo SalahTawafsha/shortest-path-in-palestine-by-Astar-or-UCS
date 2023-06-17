@@ -4,7 +4,7 @@ package records;
 
 import java.util.Objects;
 
-public record City(String name, double latitude , double longitude) {
+    public record City(String name, double latitude , double longitude) {
 
     @Override
     public boolean equals(Object obj) {

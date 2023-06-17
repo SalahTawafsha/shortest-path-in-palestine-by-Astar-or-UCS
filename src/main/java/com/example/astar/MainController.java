@@ -5,9 +5,9 @@ package com.example.astar;
 import Algorithms.AStar;
 import Algorithms.BFS;
 import Algorithms.ShortestPath;
-import Heuristic.Heuristic;
 import data_structures.Node;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 
         long currTime = System.currentTimeMillis();     // to calculate the time taken to find the shortest path
 
-        Node n = shortestPath.shortestPath(sourceBox.getValue(), destinationBox.getValue());
+        Node n = shortestPath.shortestPath(sourceBox.getValue(), destinationBox.getValue(), graph);
 
         time.setText("Time taken: " + (System.currentTimeMillis() - currTime) + "ms");   // set the time taken to the label
 
@@ -90,7 +90,7 @@ public class MainController implements Initializable {
                 l.setStrokeWidth(2);
 
                 lines.getChildren().add(l);
-                path.insert(0, curr.getParent().getCity().name() + "\n⬇\n");
+                path.insert(0, curr.getParent().getCity().name() + " -> " + (curr.getG() - curr.getParent().getG()) + "\n⬇\n");
 
             }
             this.path.setText(path.toString());
@@ -129,13 +129,14 @@ public class MainController implements Initializable {
         bfs.setToggleGroup(toggleGroup);
         aStar.setToggleGroup(toggleGroup);
 
-        ObservableList<String> cities = Heuristic.getInstance().getCities();
-        sourceBox.setItems(cities);
-        destinationBox.setItems(cities);
 
         readCities();
 
         readRoads();
+
+        ObservableList<String> cities = FXCollections.observableArrayList(new ArrayList<>(graph.keySet()).stream().map(City::name).toList());
+        sourceBox.setItems(cities);
+        destinationBox.setItems(cities);
 
         drawCities();
 

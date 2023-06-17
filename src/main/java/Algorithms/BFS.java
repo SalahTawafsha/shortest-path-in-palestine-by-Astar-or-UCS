@@ -6,16 +6,13 @@ import com.example.astar.MainController;
 import data_structures.Node;
 import records.City;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class BFS implements ShortestPath {
     private final HashMap<City, LinkedList<Node>> graph = MainController.getGraph();
 
     @Override
-    public Node shortestPath(String start, String target) {
+    public Node shortestPath(String start, String target, Map<City, LinkedList<Node>> graph) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
         LinkedList<Node> closedList = new LinkedList<>();
 
