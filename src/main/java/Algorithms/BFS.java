@@ -14,16 +14,17 @@ public class BFS implements ShortestPath {
     @Override
     public Node shortestPath(String start, String target, Map<City, LinkedList<Node>> graph) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
-        LinkedList<Node> closedList = new LinkedList<>();
+        Set<Node> closedList = new HashSet<>();
 
         queue.add(new Node(get(start), 0.0));
 
         while (!queue.isEmpty()) {          // O(V+E)
             Node curr = queue.remove();
 
-            closedList.add(curr);
             if (curr.getCity().name().equals(target))
                 return curr;
+
+            closedList.add(curr);
 
             LinkedList<Node> adj = graph.get(curr.getCity());
             for (Node node : adj) {

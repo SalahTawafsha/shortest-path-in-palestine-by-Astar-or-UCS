@@ -20,6 +20,7 @@ public class Main extends Application {
         stage.getIcons().add(new Image("file:src/main/resources/com/example/astar/icon.png"));
         stage.setScene(scene);
         stage.setMaximized(true);
+        stage.setResizable(false);
         stage.show();
     }
 
