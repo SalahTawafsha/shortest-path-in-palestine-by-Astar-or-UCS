@@ -93,13 +93,13 @@
                     <Insets />
                 </opaqueInsets>
             </RadioButton>
-            <RadioButton fx:id="bfs" mnemonicParsing="false" text="BFS" />
+            <RadioButton fx:id="ucs" mnemonicParsing="false" text="UCS" />
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-            <children>
-                <Button mnemonicParsing="false" onAction="#find" prefHeight="47.0" prefWidth="104.0" style="-fx-background-radius: 50;" text="Find" />
-                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clear" prefHeight="47.0" prefWidth="104.0" style="-fx-background-radius: 50;" text="Clear" />
-            </children>
+            <Button mnemonicParsing="false" onAction="#find" prefHeight="47.0" prefWidth="104.0"
+                    style="-fx-background-radius: 50;" text="Find"/>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clear" prefHeight="47.0"
+                    prefWidth="104.0" style="-fx-background-radius: 50;" text="Clear"/>
         </HBox>
     </VBox>
 

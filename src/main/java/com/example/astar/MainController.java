@@ -3,7 +3,7 @@
 package com.example.astar;
 
 import Algorithms.AStar;
-import Algorithms.BFS;
+import Algorithms.UCS;
 import Algorithms.ShortestPath;
 import data_structures.Node;
 import javafx.beans.value.ChangeListener;
@@ -30,7 +30,7 @@ public class MainController implements Initializable {
     @FXML
     private Pane lines;
     @FXML
-    private RadioButton bfs;
+    private RadioButton ucs;
 
     @FXML
     private RadioButton aStar;
@@ -64,7 +64,7 @@ public class MainController implements Initializable {
         if (aStar.isSelected())         // select implementation Class
             shortestPath = new AStar();
         else
-            shortestPath = new BFS();
+            shortestPath = new UCS();
 
         long currTime = System.currentTimeMillis();     // to calculate the time taken to find the shortest path
 
@@ -126,9 +126,8 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup toggleGroup = new ToggleGroup();
-        bfs.setToggleGroup(toggleGroup);
+        ucs.setToggleGroup(toggleGroup);
         aStar.setToggleGroup(toggleGroup);
-
 
         readCities();
 
@@ -220,10 +219,6 @@ public class MainController implements Initializable {
         }
 
 
-    }
-
-    public static HashMap<City, LinkedList<Node>> getGraph() {
-        return graph;
     }
 
     public void clear() {
