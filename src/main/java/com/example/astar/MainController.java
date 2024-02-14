@@ -163,7 +163,7 @@ public class MainController implements Initializable {
                 l.setLayoutX(b.getLayoutX());
                 l.setStyle(
                         "-fx-background-color: linear-gradient(to bottom, #d8d9e0, lightgray); " +
-                                "-fx-border-radius: 50;fx-border-color: gray;-fx-background-radius: 20;-fx-padding: 2.5");
+                                "-fx-border-radius: 50;fx-border-color: rgb(128,128,128);-fx-background-radius: 20;-fx-padding: 2.5");
 
 
                 l.hoverProperty().addListener(e1 -> {

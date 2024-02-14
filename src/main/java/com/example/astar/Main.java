@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Shortest path finder");
         stage.getIcons().add(new Image("file:src/main/resources/com/example/astar/icon.png"));
