@@ -19,19 +19,20 @@ git clone https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-o
 
 ### on start
 
-<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/02b0e670-c7d0-4602-b476-dcf53d817e6e" alt="on start" width="500"/>
+<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/02b0e670-c7d0-4602-b476-dcf53d817e6e" alt="on start"/>
 
 ### when hover a node
 
-<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/a8f5d032-52e3-4827-bc5d-8cd694bdea39" alt="when hover a node" width="500"/>
+<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/a8f5d032-52e3-4827-bc5d-8cd694bdea39" alt="when hover a node"/>
 
 ### when select start and end cities
 
 Note that when select start and end cities, the program will show real distance of path, draw the shortest path between
 them and will show the path in the text area of path.
-<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/0b00e6ba-4ae9-4884-8ed6-5d51fb052bc4" alt="when select start and end cities" width="500"/>
+<br>
+<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/0b00e6ba-4ae9-4884-8ed6-5d51fb052bc4" alt="when select start and end cities"/>
 
 ### when change algorithm
 
-<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/48772289-abd2-42c3-a196-2e88d0096f59" alt="when change algorithm" width="500"/>
+<img src="https://github.com/SalahTawafsha/shortest-path-in-palestine-by-Astar-or-UCS/assets/93351227/48772289-abd2-42c3-a196-2e88d0096f59" alt="when change algorithm"/>
 
